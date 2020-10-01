@@ -18,12 +18,15 @@ for _ in 1..depth:
       let n = f.extractFilename
       if n.endsWith ".nimble":
         finish nimIcon
-      if n == "Cargo.toml":
+      case n:
+      of "Cargo.toml":
         finish rustIcon
-      if n == "setup.py" or n == "requirements.txt":
+      of "setup.py", "requirements.txt":
         finish pythonIcon
-      if n == "go.mod" or n == "go.sum" or n == "Gopkg.yml" or n == "Gopkg.lock":
+      of "go.mod", "go.sum", "Gopkg.yml", "Gopkg.lock":
         finish goIcon
+       else:
+        discard
   if dir == "/":
     break
   else:
